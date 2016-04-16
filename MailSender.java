@@ -1,5 +1,3 @@
-package cn.asiainfo.javamail;
-
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
@@ -21,29 +19,28 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
 
-
 public class MailSender {
  
  public boolean sendMixMail(MailSenderInfo mailInfo)  {
-	  // ÅĞ¶ÏÊÇ·ñĞèÒªÉí·İÈÏÖ¤
+	  // åˆ¤æ–­æ˜¯å¦éœ€è¦èº«ä»½è®¤è¯
 	  MyAuthenticator authenticator = null;
 	  Properties pro = mailInfo.getProperties();
 	  if (mailInfo.isValidate()) {
-	      // Èç¹ûĞèÒªÉí·İÈÏÖ¤£¬Ôò´´½¨Ò»¸öÃÜÂëÑéÖ¤Æ÷
+	      // å¦‚æœéœ€è¦èº«ä»½è®¤è¯ï¼Œåˆ™åˆ›å»ºä¸€ä¸ªå¯†ç éªŒè¯å™¨
 		  authenticator = new MyAuthenticator(mailInfo.getUserName(), mailInfo.getPassword());
 	  }else{
-		  System.out.println("ÑéÖ¤Ê§°Ü");
+		  System.out.println("éªŒè¯å¤±è´¥");
 	  }
-	  // ¸ù¾İÓÊ¼ş»á»°ÊôĞÔºÍÃÜÂëÑéÖ¤Æ÷¹¹ÔìÒ»¸ö·¢ËÍÓÊ¼şµÄsession
+	  // æ ¹æ®é‚®ä»¶ä¼šè¯å±æ€§å’Œå¯†ç éªŒè¯å™¨æ„é€ ä¸€ä¸ªå‘é€é‚®ä»¶çš„session
 	  Session sendMailSession = Session.getDefaultInstance(pro, authenticator);
 	  try {
-			  // ¸ù¾İsession´´½¨Ò»¸öÓÊ¼şÏûÏ¢
+			  // æ ¹æ®sessionåˆ›å»ºä¸€ä¸ªé‚®ä»¶æ¶ˆæ¯
 			  Message mailMessage = new MimeMessage(sendMailSession);
-			  // ´´½¨ÓÊ¼ş·¢ËÍÕßµØÖ·
+			  // åˆ›å»ºé‚®ä»¶å‘é€è€…åœ°å€
 			  Address from = new InternetAddress(mailInfo.getFromAddress());
-			  // ÉèÖÃÓÊ¼şÏûÏ¢µÄ·¢ËÍÕß
+			  // è®¾ç½®é‚®ä»¶æ¶ˆæ¯çš„å‘é€è€…
 			  mailMessage.setFrom(from);
-			  // ´´½¨ÓÊ¼şµÄ½ÓÊÕÕßµØÖ·£¬²¢ÉèÖÃµ½ÓÊ¼şÏûÏ¢ÖĞ
+			  // åˆ›å»ºé‚®ä»¶çš„æ¥æ”¶è€…åœ°å€ï¼Œå¹¶è®¾ç½®åˆ°é‚®ä»¶æ¶ˆæ¯ä¸­
 			 // MailSenderInfo mailSenderInfo = new MailSenderInfo();
 			  String[] to=mailInfo.getToAddress();
 			  InternetAddress[] address = new InternetAddress[to.length];
@@ -54,62 +51,62 @@ public class MailSender {
 			  
 			  mailMessage.setRecipients(Message.RecipientType.TO, address);
 	   
-			  // ´´½¨ÓÊ¼şµÄ³­ËÍ×ÅµØÖ·£¬²¢ÉèÖÃµ½ÓÊ¼şÏûÏ¢ÖĞ
+			  // åˆ›å»ºé‚®ä»¶çš„æŠ„é€ç€åœ°å€ï¼Œå¹¶è®¾ç½®åˆ°é‚®ä»¶æ¶ˆæ¯ä¸­
 			  String[] tocc=mailInfo.getToAddresscc();
 			  InternetAddress[] addresscc = new InternetAddress[tocc.length];
 			  for (int i = 0; i < addresscc.length; i++) {
 				  addresscc[i] = new InternetAddress(tocc[i]);
 				  isNameAdressFormat(address[i].getAddress());
 			  }
-			  mailMessage.setRecipients(Message.RecipientType.CC, addresscc);			//´Ë´¦Îª·ÇÃÜËÍ£¬ÈôÒªÃÜËÍ½«Message.RecipientType.CC¸ÄÎªMessage.RecipientType.BCC
+			  mailMessage.setRecipients(Message.RecipientType.CC, addresscc);			//æ­¤å¤„ä¸ºéå¯†é€ï¼Œè‹¥è¦å¯†é€å°†Message.RecipientType.CCæ”¹ä¸ºMessage.RecipientType.BCC
 	    
-			  // ÉèÖÃÓÊ¼şÏûÏ¢µÄÖ÷Ìâ
+			  // è®¾ç½®é‚®ä»¶æ¶ˆæ¯çš„ä¸»é¢˜
 			  mailMessage.setSubject(mailInfo.getSubject());
-			  // ÉèÖÃÓÊ¼şÏûÏ¢·¢ËÍµÄÊ±¼ä
+			  // è®¾ç½®é‚®ä»¶æ¶ˆæ¯å‘é€çš„æ—¶é—´
 			  mailMessage.setSentDate(new Date());		  
-			  //²¿¼ş
+			  //éƒ¨ä»¶
 			  Multipart mp = new MimeMultipart();
 	         
-			  //body²¿¼ş
+			  //bodyéƒ¨ä»¶
 			  MimeBodyPart mbp = new MimeBodyPart();
 	         
-			  //ÅĞ¶Ï·¢ËÍµÄÊÇ·ñÊÇhtml¸ñÊ½
-			  if (mailInfo.isHtml()) {													// Èç¹ûÊÇhtml¸ñÊ½
+			  //åˆ¤æ–­å‘é€çš„æ˜¯å¦æ˜¯htmlæ ¼å¼
+			  if (mailInfo.isHtml()) {													// å¦‚æœæ˜¯htmlæ ¼å¼
 				  mbp.setContent(mailInfo.getContent(), "text/html;charset= "+ mailInfo.getCharset());
 			  } else{
 				  mbp.setText(mailInfo.getContent());
 			  }
-			  //½«¸ÃÕıÎÄ²¿¼ş¼ÓÈëµ½ÕûÌå²¿¼ş
+			  //å°†è¯¥æ­£æ–‡éƒ¨ä»¶åŠ å…¥åˆ°æ•´ä½“éƒ¨ä»¶
 			  mp.addBodyPart(mbp);
 	         
-			  if (mailInfo.getFiles() != null && mailInfo.getFiles().length > 0) {		// ÅĞ¶ÏÊÇ·ğÓĞ¸½¼ş
-	            //´æÔÚ¸½¼ş¾Í½«¸½¼şÈ«²¿¼ÓÈëµ½BodyPart
+			  if (mailInfo.getFiles() != null && mailInfo.getFiles().length > 0) {		// åˆ¤æ–­æ˜¯ä½›æœ‰é™„ä»¶
+	            //å­˜åœ¨é™„ä»¶å°±å°†é™„ä»¶å…¨éƒ¨åŠ å…¥åˆ°BodyPart
 				  for (File file : mailInfo.getFiles()) {
 					  mbp = new MimeBodyPart();
-					  FileDataSource fds = new FileDataSource(file); 					// µÃµ½Êı¾İÔ´
-					  mbp.setDataHandler(new DataHandler(fds)); 						// µÃµ½¸½¼ş±¾Éí²¢ÖÁÈëBodyPart
-					  mbp.setFileName(MimeUtility.encodeText(fds.getName())); 			// µÃµ½ÎÄ¼şÃû×ªÂëºóÍ¬ÑùÖÁÈëBodyPart
+					  FileDataSource fds = new FileDataSource(file); 					// å¾—åˆ°æ•°æ®æº
+					  mbp.setDataHandler(new DataHandler(fds)); 						// å¾—åˆ°é™„ä»¶æœ¬èº«å¹¶è‡³å…¥BodyPart
+					  mbp.setFileName(MimeUtility.encodeText(fds.getName())); 			// å¾—åˆ°æ–‡ä»¶åè½¬ç ååŒæ ·è‡³å…¥BodyPart
 					  mp.addBodyPart(mbp);
 	              }
 			  }
-			  // Multipart¼ÓÈëµ½ĞÅ¼ş
+			  // MultipartåŠ å…¥åˆ°ä¿¡ä»¶
 			  mailMessage.setContent(mp); 
 	  
-			  // ·¢ËÍÓÊ¼ş
+			  // å‘é€é‚®ä»¶
 			  Transport.send(mailMessage,mailMessage.getAllRecipients());
 			 
-			  System.out.println("ÓÊ¼ş·¢ËÍ³É¹¦");
+			  System.out.println("é‚®ä»¶å‘é€æˆåŠŸ");
 			  
 			  return true;
 		  	} catch (MessagingException ex) {
 		  		ex.printStackTrace();
-		  		System.out.println("·¢¼şÈËÓÊÏäµØÖ·»òÃÜÂëÓĞÎó£¬ÇëÖØĞÂ¼ì²é£¡");
+		  		System.out.println("å‘ä»¶äººé‚®ç®±åœ°å€æˆ–å¯†ç æœ‰è¯¯ï¼Œè¯·é‡æ–°æ£€æŸ¥ï¼");
 		  		} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				System.out.println("×Ö·û±àÂë²»Ö§³Ö£¡");
+				System.out.println("å­—ç¬¦ç¼–ç ä¸æ”¯æŒï¼");
 			}
-	  			System.out.println("ÓÊ¼ş·¢ËÍÊ§°Ü£¬Çë×ĞÏ¸¼ì²éÏà¹ØÉèÖÃÊÇ·ñÓĞÎó£¡");
+	  			System.out.println("é‚®ä»¶å‘é€å¤±è´¥ï¼Œè¯·ä»”ç»†æ£€æŸ¥ç›¸å…³è®¾ç½®æ˜¯å¦æœ‰è¯¯ï¼");
 		  		return false;
 		 	}
 
@@ -120,11 +117,11 @@ public class MailSender {
 	    Matcher m = p.matcher(email);  
 	    boolean b = m.matches();  
 	    if(b) {  
-	        //System.out.println("ÓĞĞ§ÓÊ¼şµØÖ·");  
+	        //System.out.println("æœ‰æ•ˆé‚®ä»¶åœ°å€");  
 	        isExist=true;
 	        
 	    } else {  
-	        System.out.println("ÎŞĞ§ÓÊ¼şµØÖ·");  
+	        System.out.println("æ— æ•ˆé‚®ä»¶åœ°å€");  
 	        System.exit(1);
 	    }  
 	    return isExist;  
