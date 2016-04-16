@@ -1,4 +1,4 @@
-package cn.asiainfo.javamail;
+package cn.liang.javamail;
 
 
 
@@ -7,44 +7,44 @@ import java.io.File;
 
 public class SendMailDemo {
 	public static void main(String[] args)  {
-	   // ÉèÖÃÓÊ¼ş·şÎñÆ÷ĞÅÏ¢
+	   // è®¾ç½®é‚®ä»¶æœåŠ¡å™¨ä¿¡æ¯
 	  MailSenderInfo mailInfo = new MailSenderInfo();
 	  mailInfo.setMailServerHost("***@163.com");
 	  //mailInfo.setMailServerPort("25");
 	  mailInfo.setValidate(true);
-	  //ÉèÖÃÊÇ·ñÊÇHTML¸ñÊ½·¢ËÍ,false´ú±í²»ÊÇ£¬true´ú±íÒÔHTML¸ñÊ½·¢ËÍ
+	  //è®¾ç½®æ˜¯å¦æ˜¯HTMLæ ¼å¼å‘é€,falseä»£è¡¨ä¸æ˜¯ï¼Œtrueä»£è¡¨ä»¥HTMLæ ¼å¼å‘é€
 	  mailInfo.setHtml(true);
 	  
 	  mailInfo.setCharset("utf-8");
-	  // ÓÊÏäÓÃ»§Ãû
-	  mailInfo.setUserName("×Ô¶¨Òå");
-	  // ÓÊÏäÃÜÂë
-	  mailInfo.setPassword("×Ô¶¨Òå");
-	  // ·¢¼şÈËÓÊÏä
-	  mailInfo.setFromAddress("×Ô¶¨Òå");
-	  // ÊÕ¼şÈËÓÊÏä,¿ÉÒÔÎª¶à¸ö
+	  // é‚®ç®±ç”¨æˆ·å
+	  mailInfo.setUserName("è‡ªå®šä¹‰");
+	  // é‚®ç®±å¯†ç 
+	  mailInfo.setPassword("è‡ªå®šä¹‰");
+	  // å‘ä»¶äººé‚®ç®±
+	  mailInfo.setFromAddress("è‡ªå®šä¹‰");
+	  // æ”¶ä»¶äººé‚®ç®±,å¯ä»¥ä¸ºå¤šä¸ª
 	  mailInfo.setToAddress(new String[]{"***@163.com","***@163.com"});
-	  // ³­ËÍÈËÓÊÏä£¬¿ÉÒÔÎª¶à¸ö
+	  // æŠ„é€äººé‚®ç®±ï¼Œå¯ä»¥ä¸ºå¤šä¸ª
 	  mailInfo.setToAddresscc(new String[]{"***@163.com"});	  	  	  	  
-	  // ÓÊ¼ş±êÌâ
+	  // é‚®ä»¶æ ‡é¢˜
 	  mailInfo.setSubject("Test");
-	  // ÓÊ¼ş¸½¼ş	  
+	  // é‚®ä»¶é™„ä»¶	  
 	  mailInfo.setFiles(new File[]{new File("F:/***.txt"),new File("F:/***.html")});
 
-	  // ÓÊ¼şÄÚÈİ
-	  //´Ë´¦ÉèÖÃ³¬Á´½Ó,html¸ñÊ½µÄ·¢ËÍ
+	  // é‚®ä»¶å†…å®¹
+	  //æ­¤å¤„è®¾ç½®è¶…é“¾æ¥,htmlæ ¼å¼çš„å‘é€
 	  StringBuilder html = new StringBuilder();
-	  html.append("<p>ÌåÑéÍøÖ·<a href='http://dacp.asiainfo.com/dacp/login'>dacp.asiainfo.com/dacp/login</a></p>");
-	  //ÉèÖÃÇ©Ãû
+	  html.append("<p>ä½“éªŒç½‘å€<a href='http://dacp.asiainfo.com/dacp/login'>dacp.asiainfo.com/dacp/login</a></p>");
+	  //è®¾ç½®ç­¾å
 	  html.append("<td>"
 	  		+ "<div style='line-height:40px;height:40px'></div>"
-	  		+ "<p style='line-height:24px;font-size:12px;color:#979797;font-family:'ËÎÌå''>´ËÓÊ¼şÎª²âÊÔÓÊ¼ş£¬ÇëÎğ»Ø¸´£¡</p>"
+	  		+ "<p style='line-height:24px;font-size:12px;color:#979797;font-family:'å®‹ä½“''>æ­¤é‚®ä»¶ä¸ºæµ‹è¯•é‚®ä»¶ï¼Œè¯·å‹¿å›å¤ï¼</p>"
 	  		+ "</td>");
 
-	  mailInfo.setContent("²âÊÔÓÊ¼ş"+html.toString());
-	  // ·¢ËÍÓÊ¼ş
+	  mailInfo.setContent("æµ‹è¯•é‚®ä»¶"+html.toString());
+	  // å‘é€é‚®ä»¶
 	  MailSender msg = new MailSender();
-	  // ·¢ËÍÎÄÌå¸ñÊ½
+	  // å‘é€æ–‡ä½“æ ¼å¼
 	  msg.sendMixMail(mailInfo);
 	 }
 	

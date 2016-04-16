@@ -1,3 +1,5 @@
+package cn.liang.javamail;
+
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;

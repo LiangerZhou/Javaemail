@@ -1,4 +1,4 @@
-package cn.asiainfo.javamail;
+package cn.liang.javamail;
 
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
