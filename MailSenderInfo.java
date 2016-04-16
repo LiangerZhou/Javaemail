@@ -1,52 +1,48 @@
-package cn.asiainfo.javamail;
-
 import java.io.File;
 import java.util.Properties;
 
-
-
 public class MailSenderInfo {
- // ·¢ËÍÓÊ¼şµÄ·şÎñÆ÷µÄIP(»òÖ÷»úµØÖ·)
+ // å‘é€é‚®ä»¶çš„æœåŠ¡å™¨çš„IP(æˆ–ä¸»æœºåœ°å€)
  private String mailServerHost;
 
- // ·¢ËÍÓÊ¼şµÄ·şÎñÆ÷µÄ¶Ë¿Ú
+ // å‘é€é‚®ä»¶çš„æœåŠ¡å™¨çš„ç«¯å£
  private String mailServerPort = "25";
 
- // ·¢¼şÈËÓÊÏäµØÖ·
+ // å‘ä»¶äººé‚®ç®±åœ°å€
  private String fromAddress;
 
- // ÊÕ¼şÈËÓÊÏäµØÖ·
+ // æ”¶ä»¶äººé‚®ç®±åœ°å€
  private String[] toAddress;
  
- // ³­ËÍÈËÓÊÏäµØÖ·
+ // æŠ„é€äººé‚®ç®±åœ°å€
  private String[] toAddresscc;
  
 
-// µÇÂ½ÓÊ¼ş·¢ËÍ·şÎñÆ÷µÄÓÃ»§Ãû
+// ç™»é™†é‚®ä»¶å‘é€æœåŠ¡å™¨çš„ç”¨æˆ·å
  private String userName;
 
- // µÇÂ½ÓÊ¼ş·¢ËÍ·şÎñÆ÷µÄÃÜÂë
+ // ç™»é™†é‚®ä»¶å‘é€æœåŠ¡å™¨çš„å¯†ç 
  private String password;
 
- // ÊÇ·ñĞèÒªÉí·İÑéÖ¤
+ // æ˜¯å¦éœ€è¦èº«ä»½éªŒè¯
  private boolean validate = false;
 
- // ÊÇ·ñHTML¸ñÊ½·¢ËÍ
+ // æ˜¯å¦HTMLæ ¼å¼å‘é€
  private boolean isHtml = false;
  
- // ÓÊ¼şÖ÷Ìâ
+ // é‚®ä»¶ä¸»é¢˜
  private String subject;
 
-// ÓÊ¼şµÄÎÄ±¾ÄÚÈİ
+// é‚®ä»¶çš„æ–‡æœ¬å†…å®¹
  private String content;
 
- // ÓÊ¼ş¸½¼şµÄÎÄ¼şÃû
+ // é‚®ä»¶é™„ä»¶çš„æ–‡ä»¶å
  private String[] attachFileNames;
 
- //×Ö·û¼¯
+ //å­—ç¬¦é›†
  private String charset ;
  
- // ÎÄ¼ş
+ // æ–‡ä»¶
  private File[] files;
  
 
@@ -173,7 +169,5 @@ public File[] getFiles() {
 public void setFiles(File[] files) {
 	this.files = files;
 }
-
-
 
 } 
